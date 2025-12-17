@@ -1,0 +1,204 @@
+# Dataset
+ds_name: dubosson2018
+data_csv_path: ./raw_data/dubosson.csv
+index_col: -1
+observation_interval: 5min
+
+# Columns
+column_definition:
+  - name: id
+    data_type: categorical
+    input_type: id
+  - name: time
+    data_type: date
+    input_type: time
+  - name: gl
+    data_type: real_valued
+    input_type: target
+  - name: fast_insulin
+    data_type: real_valued
+    input_type: observed_input
+  - name: slow_insulin
+    data_type: real_valued
+    input_type: observed_input
+  - name: calories
+    data_type: real_valued
+    input_type: observed_input
+  - name: balance
+    data_type: categorical
+    input_type: observed_input
+  - name: quality
+    data_type: categorical
+    input_type: observed_input
+  - name: HR
+    data_type: real_valued
+    input_type: observed_input
+  - name: BR
+    data_type: real_valued
+    input_type: observed_input
+  - name: Posture
+    data_type: real_valued
+    input_type: observed_input
+  - name: Activity
+    data_type: real_valued
+    input_type: observed_input
+  - name: HRV
+    data_type: real_valued
+    input_type: observed_input
+  - name: CoreTemp
+    data_type: real_valued
+    input_type: observed_input
+
+# Drop
+drop:
+  rows: null
+  columns:
+    id:
+      - 9
+
+# NA values abbreviation
+nan_vals: null
+
+# Interpolation parameters
+interpolation_params:
+  gap_threshold: 30 # in minutes
+  min_drop_length: 240 # number of points
+
+# Splitting parameters
+split_params:
+  test_percent_subjects: 0.1
+  length_segment: 144
+  random_state: 0
+
+# Encoding parameters
+encoding_params:
+  date: 
+    - year
+    - month
+    - day
+    - hour
+    - minute
+
+# Scaling parameters
+scaling_params:
+  scaler: None
+
+# Model params
+max_length_input: 192
+length_pred: 12
+
+linreg:
+  in_len: 12
+
+linreg_covariates:
+  in_len: 12
+
+tft:
+  in_len: 168
+  max_samples_per_ts: 50
+  hidden_size: 240
+  num_attention_heads: 2
+  dropout: 0.24910705171945197
+  lr: 0.003353965994113796
+  batch_size: 64
+  max_grad_norm: 0.999584070166802
+
+tft_covariates:
+  in_len: 120
+  max_samples_per_ts: 50
+  hidden_size: 240
+  num_attention_heads: 1
+  dropout: 0.2354005483884536
+  lr: 0.0014372065280028868
+  batch_size: 32
+  max_grad_norm: 0.08770929102027172
+
+xgboost:
+  in_len: 168
+  lr: 0.6910000000000001
+  subsample: 0.8
+  min_child_weight: 5.0
+  colsample_bytree: 0.8
+  max_depth: 10
+  gamma: 0.5
+  alpha: 0.201
+  lambda_: 0.279
+  n_estimators: 416
+  
+xgboost_covariates:
+  in_len: 36
+  lr: 0.651
+  subsample: 0.8
+  min_child_weight: 2.0
+  colsample_bytree: 1.0
+  max_depth: 6
+  gamma: 1.5
+  alpha: 0.148
+  lambda_: 0.094
+  n_estimators: 480
+
+transformer:
+  in_len: 108
+  max_samples_per_ts: 50
+  d_model: 32
+  n_heads: 2
+  num_encoder_layers: 1
+  num_decoder_layers: 1
+  dim_feedforward: 384
+  dropout: 0.038691123579122515
+  lr: 0.0004450217945481336
+  batch_size: 32
+  lr_epochs: 6
+  max_grad_norm: 0.20863935142150056
+
+transformer_covariates:
+  in_len: 156
+  max_samples_per_ts: 50
+  d_model: 64
+  n_heads: 2
+  num_encoder_layers: 2
+  num_decoder_layers: 1
+  dim_feedforward: 384
+  dropout: 0.0026811942171770446
+  lr: 0.000998963295875978
+  batch_size: 48
+  lr_epochs: 20
+  max_grad_norm: 0.1004169110387992
+
+nhits:
+  in_len: 108
+  max_samples_per_ts: 50
+  kernel_sizes: 3
+  dropout: 0.06496948174462439
+  lr: 0.0003359362814711015
+  batch_size: 32
+  lr_epochs: 2
+
+nhits_covariates:
+  in_len: 120
+  max_samples_per_ts: 50
+  kernel_sizes: 2
+  dropout: 0.16272090435698405
+  lr: 0.0004806891979994542
+  batch_size: 48
+  lr_epochs: 12
+
+gluformer:
+  in_len: 108
+  max_samples_per_ts: 100
+  d_model: 256
+  n_heads: 12
+  d_fcn: 1664
+  num_enc_layers: 1
+  num_dec_layers: 2
+
+latentode:
+  in_len: 48
+  max_samples_per_ts: 100
+  latents: 20
+  rec_dims: 40
+  rec_layers: 3
+  gen_layers: 3
+  units: 100
+  gru_units: 100
+
