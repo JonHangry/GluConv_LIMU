@@ -19,14 +19,14 @@ import optuna
 import darts
 from torch.utils.tensorboard import SummaryWriter
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from lib.GluConcern.utils.training import ExpLikeliLoss, \
+from lib.GluConv.utils.training import ExpLikeliLoss, \
                                          EarlyStop, \
                                          modify_collate, \
                                          adjust_learning_rate
 from utils.darts_dataset import SamplingDatasetDual
 
 # 添加自己的模型和忽略告警
-from lib.GluConcern.ConvKernel import *
+from lib.GluConv.ConvKernel import *
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -42,9 +42,7 @@ class GluConcern(nn.Module):
     self.len_seq = len_seq
 
     # Embedding
-    # note: d_model // 2 == 0
     self.enc_embedding = DataEmbedding(d_model, r_drop, num_dynamic_features, num_static_features)
-    # self.dec_embedding = DataEmbedding(d_model, r_drop, num_dynamic_features, num_static_features)
     self.SparseAttentionBlock = ConvAll(e_layers=e_layers, d_layers=d_layers, seq_len=1 + self.len_seq, seq_model=seq_model, d_model=d_model)
     
     # Output

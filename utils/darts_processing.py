@@ -158,7 +158,7 @@ def load_data(seed = 0,
         # attach static covariates to series
         for split in ['train', 'val', 'test', 'test_ood']:
             for i in range(len(series[split]['target'])):
-                static_covs = series[split]['static'][i][0].to_dataframe()
+                static_covs = series[split]['static'][i][0].pd_dataframe()
                 series[split]['target'][i] = series[split]['target'][i].with_static_covariates(static_covs)
 
     return formatter, series, scalers
@@ -269,7 +269,7 @@ class ScalerCustom:
     def fit(self, time_series: Union[List[TimeSeries], TimeSeries]) -> None:
         if isinstance(time_series, list):
             # extract series as Pandas dataframe
-            df = pd.concat([ts.to_dataframe() for ts in time_series])
+            df = pd.concat([ts.pd_dataframe() for ts in time_series])
             value_cols = df.columns
             df.reset_index(inplace=True)
             # create new equally spaced time grid

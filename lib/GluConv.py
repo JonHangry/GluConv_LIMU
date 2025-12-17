@@ -14,8 +14,8 @@ os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 # import data formatter
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from data_formatter.base import *
-from lib.GluConcern.model import GluConcern
-from lib.GluConcern.utils.evaluation import test
+from lib.GluConv.model import GluConcern
+from lib.GluConv.utils.evaluation import test
 from utils.darts_training import print_callback
 from utils.darts_processing import load_data, reshuffle_data
 from utils.darts_dataset import SamplingDatasetDual, SamplingDatasetInferenceDual
@@ -144,8 +144,8 @@ if __name__ == '__main__':
                        catch=(np.linalg.LinAlgError, KeyError))
         best_params = study.best_trial.params
     else:
-        assert formatter.params["GluConcern"] is not None, "No saved hyperparameters found for this model"
-        best_params = formatter.params["GluConcern"]
+        assert formatter.params["GluConv"] is not None, "No saved hyperparameters found for this model"
+        best_params = formatter.params["GluConv"]
 
     # set parameters
     out_len = formatter.params['length_pred']
