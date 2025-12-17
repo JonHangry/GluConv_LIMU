@@ -6,7 +6,7 @@
 
 # 🥛 Takeaway
 
-All detailed responses are contained in [GluConv Response Letter](./GluConv_Response_Letter.docx).
+All detailed responses are contained in [GluConv Response Letter](./GluConv_Response_Letter.pdf).
 
 The planed resubmission version is [GluConv Resubmission](./GluConv_Resubmission.pdf).
 
